@@ -28,12 +28,15 @@
 package io.github.myessentials.mytown2;
 
 import com.google.inject.Inject;
+import io.github.myessentials.mytown2.api.entities.flags.FlagType;
 import io.github.myessentials.mytown2.config.Config;
 import io.github.myessentials.mytown2.config.ConfigManager;
+import io.github.myessentials.mytown2.registries.FlagRegistry;
 import me.flibio.updatifier.Updatifier;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import org.slf4j.Logger;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.event.Listener;
@@ -78,6 +81,9 @@ public class MyTown2 {
     public void onPreInit(GamePreInitializationEvent ev) {
         // Load the config
         configManager.load();
+
+        // Register registries
+        Sponge.getRegistry().registerModule(FlagType.class, new FlagRegistry());
     }
 
     @Listener
