@@ -27,13 +27,13 @@
 
 package io.github.myessentials.mytown2.api.entities;
 
+import com.flowpowered.math.vector.Vector3i;
 import io.github.myessentials.mytown2.api.entities.flags.Flag;
 import org.spongepowered.api.text.TextRepresentable;
 import org.spongepowered.api.world.Chunk;
 
 import java.util.List;
 
-// TODO: Implement town blocks entirely
 public interface TownBlock extends TextRepresentable, Comparable<TownBlock> {
     /**
      * Returns the {@link Chunk} this {@link TownBlock} resides in
@@ -55,6 +55,13 @@ public interface TownBlock extends TextRepresentable, Comparable<TownBlock> {
      * @return The {@link Flag}s
      */
     Flag.Container flags();
+
+    /**
+     * Returns the chunk position of this {@link TownBlock}
+     *
+     * @return The position
+     */
+    Vector3i getPosition();
 
     interface Container extends List<TownBlock> {
     }
