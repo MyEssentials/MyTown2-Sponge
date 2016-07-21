@@ -27,19 +27,72 @@
 
 package io.github.myessentials.mytown2.api.entities;
 
+import com.flowpowered.math.vector.Vector3i;
 import io.github.myessentials.mytown2.api.entities.flags.Flag;
 import org.spongepowered.api.text.TextRepresentable;
+import org.spongepowered.api.util.Identifiable;
+import org.spongepowered.api.world.extent.Extent;
 
 import java.util.List;
 
-// TODO: Implement plots entirely
-public interface Plot extends TextRepresentable, Comparable<Plot> {
+public interface Plot extends Identifiable, TextRepresentable, Comparable<Plot> {
     /**
      * Returns the {@link Flag}s this {@link Plot} has
      *
      * @return The {@link Flag}s
      */
     Flag.Container flags();
+
+    /**
+     * Returns the members of this {@link Plot}
+     *
+     * @return The members
+     */
+    Resident.Container members();
+
+    /**
+     * Returns the owners of this {@link Plot}
+     *
+     * @return The owners
+     */
+    Resident.Container owners();
+
+    /**
+     * Returns the {@link World} this {@link Plot} is in
+     *
+     * @return The {@link World}
+     */
+    World world();
+
+    /**
+     * Returns the {@link Town} this {@link Plot} is part of
+     *
+     * @return The {@link Town}
+     */
+    Town town();
+
+    /**
+     * Returns the start position of this {@link Plot}
+     *
+     * @return The start position
+     */
+    Vector3i getStart();
+
+    /**
+     * Returns the end position of this {@link Plot}
+     *
+     * @return The end position
+     */
+    Vector3i getEnd();
+
+    /**
+     * Returns the {@link Extent} of this {@link Plot}
+     *
+     * @return The {@link Extent}
+     */
+    default Extent getExtent() {
+        return world().getWorld().get().getExtentView(getStart(), getEnd());
+    }
 
     interface Container extends List<Plot> {
     }
